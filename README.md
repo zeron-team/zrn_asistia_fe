@@ -8,9 +8,19 @@
         ├── /public
         ├── /src
         │   ├── /components
-        │   │   └──
+        │   │     ├── Navbar.js
+        │   │     ├── Sidebar.js
+        │   │     ├── PrivateRoute.js
+        │   │     ├── UserForm.js
+        │   │     ├── UserTable.js
+        │   │     ├── ThemeSwitcher.js
+        │   │     └── LoadingSpinner.js
         │   ├── /pages
-        │   │   └──
+        │   │     ├── LoginPage.js
+        │   │     ├── AdminDashboard.js
+        │   │     ├── UserManagementPage.js
+        │   │     ├── StudentAssistant.js
+        │   │     └── NotFoundPage.js
         │   ├── /services
         │   │   └──
         │   ├── /context
@@ -19,7 +29,8 @@
         │   │   └──        
         │   ├── /utils
         │   │   └──        
-        │   └── index.js
+        │   ├── index.js
+        │   └── App.js
 ```        
 
 # GIT
