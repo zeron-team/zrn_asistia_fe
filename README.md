@@ -29,7 +29,7 @@
 - git commit -m "first commit"
 - git branch -M main
 - git remote add origin https://github.com/zeron-team/asis_alumno_ia_fe.git
-- git push -u origin main
+- git push -u origin master
 
 #### si se cambia el repo / actulizarlo
 - git remote set-url origin https://github.com/zeron-team/asis_alumno_ia_fe.git
