@@ -1,3 +1,56 @@
+# ALUMNOS IA
+
+# ESTRUCTURA
+
+```text
+/project_root
+    └── /frontend
+        ├── /public
+        ├── /src
+        │   ├── /components
+        │   │   └──
+        │   ├── /pages
+        │   │   └──
+        │   ├── /services
+        │   │   └──
+        │   ├── /context
+        │   │   └──        
+        │   ├── /hooks
+        │   │   └──        
+        │   ├── /utils
+        │   │   └──        
+        │   └── index.js
+```        
+
+# GIT
+- echo "# asis_alumno_ia_fe" >> README.md
+- git init
+- git add README.md
+- git commit -m "first commit"
+- git branch -M main
+- git remote add origin https://github.com/zeron-team/asis_alumno_ia_fe.git
+- git push -u origin main
+
+#### si se cambia el repo / actulizarlo
+- git remote set-url origin https://github.com/zeron-team/asis_alumno_ia_fe.git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
