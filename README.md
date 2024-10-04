@@ -34,16 +34,17 @@
 ```        
 
 # GIT
-- echo "# asis_alumno_ia_fe" >> README.md
-- git init
-- git add README.md
-- git commit -m "first commit"
-- git branch -M main
-- git remote add origin https://github.com/zeron-team/asis_alumno_ia_fe.git
-- git push -u origin master
-
+```text
+echo "# zrn_asistia_fe" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/zeron-team/zrn_asistia_fe.git
+git push -u origin master
+```
 #### si se cambia el repo / actulizarlo
-- git remote set-url origin https://github.com/zeron-team/asis_alumno_ia_fe.git
+- git remote set-url origin https://github.com/zeron-team/zrn_asistia_fe.git
 
 
 

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  display: flex;
 }
 
 .App-logo {
@@ -44,4 +45,18 @@
   width: calc(100% - 250px);
   height: 100vh;
   overflow: auto;
+  transition: margin-left 0.3s ease;
+  flex-grow: 1;
+}
+
+.with-sidebar {
+  margin-left: 200px;  /* Ajusta el contenido para dejar espacio para la barra lateral */
+}
+
+h1, h2 {
+    color: #333;
+}
+
+p {
+    color: #555;
 }

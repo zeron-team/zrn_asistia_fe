@@ -1,0 +1,82 @@
+/* Estilos para la página principal */
+.home {
+  background-color: #f5f5f5; /* Fondo gris muy claro */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Estilos para el encabezado con el logo */
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.home-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+h1 {
+  color: #333;
+  font-size: 32px;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Contenedor del contenido */
+.content {
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff; /* Fondo blanco para el contenido */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Bloques de contenido */
+.block {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-left: 5px solid #4CAF50; /* Barra verde para darle estilo */
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+h2 {
+  color: #4CAF50; /* Título con color verde suave */
+  font-size: 24px;
+  margin: 0;
+}
+
+p {
+  color: #555; /* Color de texto gris */
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Responsivo: ajuste para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .content {
+      padding: 20px;
+  }
+
+  h1 {
+      font-size: 24px;
+  }
+
+  h2 {
+      font-size: 20px;
+  }
+
+  p {
+      font-size: 14px;
+  }
+}

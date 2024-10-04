@@ -1,17 +1,14 @@
-// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // Asegúrate de usar 'react-dom/client' en React 18
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { AuthProvider } from './context/AuthContext';
 
-// Crear el root
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-// Renderizar la aplicación con un único BrowserRouter
 root.render(
-  <BrowserRouter>
-    <React.StrictMode>
+  <AuthProvider>
+    <BrowserRouter>
       <App />
-    </React.StrictMode>
-  </BrowserRouter>
+    </BrowserRouter>
+  </AuthProvider>
 );
