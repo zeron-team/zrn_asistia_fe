@@ -1,32 +1,40 @@
 // src/App.js
 
-// src/App.js
-
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import SidebarMenu from './components/SidebarMenu'; 
-import Home from './pages/Home'; 
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import SidebarMenu from './components/SidebarMenu';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
 import Students from './pages/Students';
-import Teachers from './pages/Teachers'; 
-import Dashboard from './pages/Dashboard'; 
-import UserManagement from './pages/UserManagement'; 
-import AdminDashboard from './pages/AdminDashboard'; 
-import LoginPage from './pages/LoginPage'; 
-import PrivateRoute from './components/PrivateRoute'; 
+import Teachers from './pages/Teachers';
+import Dashboard from './pages/Dashboard';
+import UserManagement from './pages/UserManagement';
+import AdminDashboard from './pages/AdminDashboard';
+import LoginPage from './pages/LoginPage';
+import PrivateRoute from './components/PrivateRoute';
 import { useAuth } from './context/AuthContext';
 import './App.css';
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, isLoading, navigate]);
 
   if (isLoading) {
-    return <div>Cargando...</div>; // Mientras carga la autenticación, mostramos un mensaje
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="App">
-      {isAuthenticated && <SidebarMenu />}
-      <div className={`main-content ${isAuthenticated ? 'with-sidebar' : ''}`}>
+      {isAuthenticated && window.location.pathname !== '/login' && <SidebarMenu />}
+      {isAuthenticated && window.location.pathname !== '/login' && <Header />}
+      <div className={`main-content ${!isAuthenticated ? 'centered-content' : ''}`}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={
@@ -61,6 +69,7 @@ function App() {
           } />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
+        {isAuthenticated && window.location.pathname !== '/login' && <Footer />}
       </div>
     </div>
   );

@@ -1,0 +1,155 @@
+/* Teachers CSS */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.teachers-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.teachers-header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.option-selection {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.option-button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+.option-button:hover {
+  background-color: #2980b9;
+}
+
+.assistant-form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group select:focus {
+  border-color: #3498db;
+}
+
+.content-generation {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.content-generation button {
+  background-color: #27ae60;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.content-generation button:hover {
+  background-color: #229954;
+}
+
+.generated-content {
+  width: 100%;
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.generated-content h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.generated-content p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  text-align: left;
+}
+strong {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+em {
+  color: #2980b9;
+  font-style: italic;
+}
+.generated-content ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.generated-content ul li {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .teachers-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .option-button {
+    margin: 10px 5px;
+  }
+}

@@ -18,7 +18,7 @@ function AdminDashboard() {
     }
 
     // Obtener todos los usuarios
-    axios.get('http://10.100.210.31:3355/api/users/all_users', {
+    axios.get('http://10.100.210.241:3355/api/users/all_users', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
@@ -37,7 +37,7 @@ function AdminDashboard() {
   // Handler for deleting a user
   const handleDelete = (userId) => {
     // Aquí puedes implementar la lógica de eliminación
-    axios.delete(`http://10.100.210.31:3355/api/users/${userId}`, {
+    axios.delete(`http://10.100.210.241:3355/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
       .then(() => {

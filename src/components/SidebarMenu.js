@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faChalkboardTeacher, faChartLine, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserGraduate, faHome, faUser, faChalkboardTeacher, faChartLine, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import './SidebarMenu.css';
 
@@ -16,7 +16,10 @@ const SidebarMenu = () => {
 
   return (
     <div className="sidebar">
-      <h2>Menu</h2>
+      <div className="logo-container">
+        <img src="/images/logo.png" alt="Logo" className="sidebar-logo" />
+      </div>
+      <h2>Menú</h2>
       <ul>
         <li>
           <Link to="/home">
@@ -25,7 +28,7 @@ const SidebarMenu = () => {
         </li>
         <li>
           <Link to="/students">
-            <FontAwesomeIcon icon={faUser} /> <span>Estudiantes</span>
+            <FontAwesomeIcon icon={faUserGraduate} /> <span>Estudiantes</span>
           </Link>
         </li>
         <li>
@@ -36,6 +39,11 @@ const SidebarMenu = () => {
         <li>
           <Link to="/dashboard">
             <FontAwesomeIcon icon={faChartLine} /> <span>Dashboard</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/user-management">
+            <FontAwesomeIcon icon={faUser} /> <span>Usuarios</span>
           </Link>
         </li>
         <li>

@@ -16,7 +16,7 @@ function AdminDashboard() {
       navigate('/login');
     }
 
-    axios.get('http://10.100.210.31:3355/api/users/all_users', {
+    axios.get('http://localhost:3355/api/users/all_users', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(response => {
@@ -36,7 +36,7 @@ function AdminDashboard() {
   };
 
   const handleDelete = (userId) => {
-    axios.delete(`http://10.100.210.31:3355/api/users/${userId}`)
+    axios.delete(`http://10.100.210.241:3355/api/users/${userId}`)
       .then(() => {
         setUsers(users.filter(user => user._id !== userId));
       })

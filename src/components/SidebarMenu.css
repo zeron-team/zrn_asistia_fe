@@ -1,51 +1,75 @@
 /* src/components/SidebarMenu.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
 .sidebar {
-  width: 200px;
-  background-color: #f0f0f0;
-  height: 100vh;
-  padding: 20px;
-  font-family: 'Poppins', sans-serif;  /* Fuente moderna */
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #f0f0f0; /* Fondo gris claro */
+  color: #333; /* Texto oscuro */
+  padding-top: 20px;
+  z-index: 999;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; /* Para evitar que el hover sobresalga */
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.sidebar-logo {
+  width: 150px;
+  height: auto;
 }
 
 .sidebar h2 {
-  font-size: 24px;
+  font-size: 22px;
   color: #333;
   margin-bottom: 20px;
-  text-align: center;
 }
 
 .sidebar ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  width: 100%; /* Aseguramos que el ancho se ajuste al sidebar */
 }
 
 .sidebar ul li {
   margin: 15px 0;
 }
 
-.sidebar ul li a {
-  text-decoration: none;
+.sidebar ul li a, .sidebar ul li button {
   color: #333;
-  font-size: 18px;
+  text-decoration: none;
   display: flex;
   align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  box-sizing: border-box; /* Asegura que los bordes se respeten */
 }
 
-.sidebar ul li a:hover {
-  background-color: #ddd;
-  border-radius: 5px;
-  padding: 10px;
+.sidebar ul li a:hover, .sidebar ul li button:hover {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden; /* Evita que sobresalga */
+  box-shadow: none; /* Remueve cualquier sombra no deseada */
 }
 
-.sidebar ul li a span {
+.sidebar ul li a span, .sidebar ul li button span {
   margin-left: 10px;
 }
 
-.sidebar ul li a svg {
-  font-size: 20px;
-  color: #4CAF50;
+/* Extra padding para que no sobresalgan */
+.sidebar ul li a, .sidebar ul li button {
+  padding-right: 10px;
 }

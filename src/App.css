@@ -1,3 +1,5 @@
+/* src/App.css */
+
 .App {
   text-align: center;
   display: flex;
@@ -41,12 +43,15 @@
 
 .main-content {
   margin-left: 250px; /* Para que no se superponga con el menú lateral */
-  padding: 20px;
+  padding-top: 60px;  /* Deja espacio para el Header */
+  padding-bottom: 40px; /* Deja espacio para el Footer */
   width: calc(100% - 250px);
   height: 100vh;
   overflow: auto;
   transition: margin-left 0.3s ease;
   flex-grow: 1;
+  min-height: calc(100vh - 100px); /* Ajusta el contenido entre el Header y el Footer */
+  background-color: #f5f5f5;
 }
 
 .with-sidebar {
@@ -60,3 +65,9 @@ h1, h2 {
 p {
     color: #555;
 }
+
+
+.content {
+  padding: 20px;
+}
+
