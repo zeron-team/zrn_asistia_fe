@@ -5,10 +5,10 @@ import axios from 'axios';
 import './Teachers.css';
 import thesaurusData from '../data/thesauro_ps.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChalkboardTeacher, faSpinner, faDownload } from '@fortawesome/free-solid-svg-icons'; // Icono para descargar
-import jsPDF from 'jspdf';
+import { faChalkboardTeacher, faSpinner, faDownload } from '@fortawesome/free-solid-svg-icons';
+// eslint-disable-next-line
 import html2pdf from 'html2pdf.js';
-import logo from '../assets/logo.png'; // Asegúrate de que la ruta al logo sea correcta
+import logo from '../assets/logo.png';
 
 const Teachers = () => {
   const [selectedOption, setSelectedOption] = useState('');
@@ -72,24 +72,30 @@ const Teachers = () => {
         setLoading(true);
         const response = await axios.post(
           'http://10.100.210.241:3355/api/openai/planificacion',
-          { 
-            nivel, 
-            grado, 
-            area, 
-            disciplina, 
-            tema, 
+          {
+            nivel,
+            grado,
+            area,
+            disciplina,
+            tema,
             selectedOption,
             duracion
-          }, 
+          },
           { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
         );
-        setContenidoGenerado(response.data.planificacion);
+        if (response.data && response.data.planificacion) {
+          setContenidoGenerado(response.data.planificacion);
+        } else {
+          setContenidoGenerado('El formato de respuesta no es válido.');
+        }
       } catch (error) {
         console.error('Error al generar el contenido:', error);
         setContenidoGenerado('No se pudo generar el contenido en este momento.');
       } finally {
         setLoading(false);
       }
+    } else {
+      setContenidoGenerado('Por favor, asegúrese de completar todos los campos.');
     }
   };
 
@@ -100,8 +106,8 @@ const Teachers = () => {
       .replace(/(Duración Total:)/g, '<br/><strong>$1</strong><br/>')
       .replace(/(Recursos necesarios:)/g, '<br/><strong>$1</strong><br/>')
       .replace(/(Momento\s+\d+:)/g, '<br/><strong>$1</strong><br/>')
-      .replace(/(-\s)/g, '')  
-      .replace(/(--\s)/g, '')  
+      .replace(/(-\s)/g, '')
+      .replace(/(--\s)/g, '')
       .replace(/(-)/g, '')
       .replace(/(##)/g, '')
       .replace(/(#)/g, '')
@@ -117,14 +123,13 @@ const Teachers = () => {
       .replace(/\n/g, '<br/>');
   };
 
-  // Función para descargar el PDF usando html2pdf.js
   const descargarPDF = () => {
     const fechaActual = new Date().toLocaleDateString();
 
     const content = document.querySelector('.generated-content');
 
     const opt = {
-      margin: [50, 10, 50, 10], // Margen de 50px para acomodar el header y footer
+      margin: [50, 10, 50, 10],
       filename: 'actividad.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
@@ -132,24 +137,28 @@ const Teachers = () => {
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
     };
 
-    html2pdf().from(content).set(opt).toPdf().get('pdf').then((pdf) => {
-      const pageCount = pdf.internal.getNumberOfPages();
+    const logoImg = new Image();
+    logoImg.src = logo;
+    logoImg.onload = function () {
+      html2pdf().from(content).set(opt).toPdf().get('pdf').then((pdf) => {
+        const pageCount = pdf.internal.getNumberOfPages();
 
-      // Logo y fecha en la parte superior de cada página
-      for (let i = 1; i <= pageCount; i++) {
-        pdf.setPage(i);
-        // Header: Logo a la izquierda y fecha
-        pdf.setFontSize(10);
-        pdf.text(`Fecha: ${fechaActual}`, 40, 30); // Fecha en la parte izquierda superior
-        pdf.addImage(logo, 'PNG', pdf.internal.pageSize.getWidth() - 60, 10, 40, 15); // Logo en la parte derecha superior
+        for (let i = 1; i <= pageCount; i++) {
+          pdf.setPage(i);
+          pdf.setFontSize(10);
+          pdf.text(`Fecha: ${fechaActual}`, 40, 30);
+          pdf.addImage(logo, 'PNG', pdf.internal.pageSize.getWidth() - 60, 10, 40, 15);
+          pdf.addImage(logo, 'PNG', pdf.internal.pageSize.getWidth() - 60, pdf.internal.pageSize.getHeight() - 40, 40, 15);
+          pdf.text(`Página ${i} de ${pageCount}`, pdf.internal.pageSize.getWidth() / 2 - 20, pdf.internal.pageSize.getHeight() - 30);
+        }
 
-        // Footer: Logo a la derecha y paginación al centro
-        pdf.addImage(logo, 'PNG', pdf.internal.pageSize.getWidth() - 60, pdf.internal.pageSize.getHeight() - 40, 40, 15); // Logo en la parte derecha inferior
-        pdf.text(`Página ${i} de ${pageCount}`, pdf.internal.pageSize.getWidth() / 2 - 20, pdf.internal.pageSize.getHeight() - 30); // Paginación en el centro
-      }
+        pdf.save('actividad.pdf');
+      });
+    };
 
-      pdf.save('actividad.pdf');
-    });
+    logoImg.onerror = function () {
+      console.error('Error al cargar la imagen del logo.');
+    };
   };
 
   return (
@@ -171,7 +180,7 @@ const Teachers = () => {
       {selectedOption && (
         <form className="assistant-form">
           <div className="form-group">
-            <label htmlFor="nivel">Nivel</label>
+            <label htmlFor="nivel">Nivel: </label>
             <select id="nivel" value={nivel} onChange={(e) => setNivel(e.target.value)}>
               <option value="">Seleccione el nivel</option>
               <option value="primaria">Primaria</option>
@@ -180,7 +189,7 @@ const Teachers = () => {
           </div>
           {nivel && (
             <div className="form-group">
-              <label htmlFor="grado">Grado/Año</label>
+              <label htmlFor="grado">Grado/Año: </label>
               <select id="grado" value={grado} onChange={(e) => setGrado(e.target.value)}>
                 <option value="">Seleccione el grado/año</option>
                 {nivel === 'primaria' && ['1', '2', '3', '4', '5', '6', '7'].map((g) => <option key={g} value={g}>{g}</option>)}
@@ -190,7 +199,7 @@ const Teachers = () => {
           )}
           {grado && (
             <div className="form-group">
-              <label htmlFor="area">Área</label>
+              <label htmlFor="area">Área: </label>
               <select id="area" value={area} onChange={(e) => setArea(e.target.value)}>
                 <option value="">Seleccione el área</option>
                 {areas.map((a) => <option key={a} value={a}>{a}</option>)}
@@ -199,7 +208,7 @@ const Teachers = () => {
           )}
           {area && (
             <div className="form-group">
-              <label htmlFor="disciplina">Disciplina</label>
+              <label htmlFor="disciplina">Disciplina: </label>
               <select id="disciplina" value={disciplina} onChange={(e) => setDisciplina(e.target.value)}>
                 <option value="">Seleccione la disciplina</option>
                 {disciplinas.map((d) => <option key={d} value={d}>{d}</option>)}
@@ -208,7 +217,7 @@ const Teachers = () => {
           )}
           {disciplina && (
             <div className="form-group">
-              <label htmlFor="tema">Tema</label>
+              <label htmlFor="tema">Tema: </label>
               <select id="tema" value={tema} onChange={(e) => setTema(e.target.value)}>
                 <option value="">Seleccione el tema</option>
                 {temas.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -217,7 +226,7 @@ const Teachers = () => {
           )}
           {tema && (
             <div className="form-group">
-              <label htmlFor="duracion">Duración (minutos)</label>
+              <label htmlFor="duracion">Duración (minutos): </label>
               <select id="duracion" value={duracion} onChange={(e) => setDuracion(e.target.value)}>
                 <option value="">Seleccione la duración</option>
                 {[10, 20, 30, 45, 60, 90, 120].map((d) => (

@@ -1,9 +1,9 @@
-//frontend/sec/pages/LoginPage.js
+//frontend/src/pages/LoginPage.js
 
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode as jwt_decode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';  // Importa correctamente jwt-decode
 import './LoginPage.css';  // Agregamos un archivo CSS para el diseño
 
 function LoginPage() {
@@ -14,10 +14,21 @@ function LoginPage() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://10.100.210.241:3355/api/auth/login', { username, password });
-            localStorage.setItem('token', response.data.access_token);
-            const userRole = jwt_decode(response.data.access_token).rol;
+            const response = await axios.post(
+                'http://10.100.210.241:3355/api/auth/login', 
+                { username, password },
+                { withCredentials: true }  // Envío de credenciales (cookies)
+            );
+
+            // Guarda el token en localStorage
+            const token = response.data.access_token;
+            localStorage.setItem('token', token);
+
+            // Decodifica el token para obtener el rol del usuario
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken.rol;
     
+            // Redirige según el rol del usuario
             if (userRole === 'admin') {
                 navigate('/home');
             } else if (userRole === 'docente') {
@@ -28,6 +39,7 @@ function LoginPage() {
                 setError('Rol de usuario no válido');
             }
         } catch (error) {
+            // Muestra un mensaje de error si hay un problema con la autenticación
             setError('Usuario o contraseña incorrectos');
             console.error('Error al iniciar sesión:', error);
         }

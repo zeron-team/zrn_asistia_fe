@@ -6,7 +6,6 @@ import { Line, Bar, Pie } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Title, Tooltip, Legend, PieController } from 'chart.js';
 import './Home.css';
 
-// Registrar componentes de Chart.js
 Chart.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Title, Tooltip, Legend, PieController);
 
 const Home = () => {
@@ -16,14 +15,13 @@ const Home = () => {
   const [temasFrecuentes, setTemasFrecuentes] = useState([]);
   const [seleccionTokens, setSeleccionTokens] = useState([]);
 
-  // Obtener el token JWT almacenado en localStorage o donde lo tengas almacenado
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchKpis = async () => {
       try {
         const headers = {
-          Authorization: `Bearer ${token}`, // Corregido
+          Authorization: `Bearer ${token}`,
         };
 
         const resUsuarios = await axios.get('http://10.100.210.241:3355/api/users/kpi/usuarios_registrados', { headers });
@@ -33,7 +31,7 @@ const Home = () => {
         const resTokens = await axios.get('http://10.100.210.241:3355/api/users/grafico/seleccion_tokens', { headers });
 
         setUsuariosRegistrados(resUsuarios.data.total_usuarios);
-        setUsuariosActivos(resActivos.data.usuarios_activos);
+        setUsuariosActivos(resActivos.data.usuarios_activos);  // Usuarios activos basados en los últimos 5 minutos
         setUsuariosConectadosPorDia(resGrafico.data);
         setTemasFrecuentes(resTemas.data);
         setSeleccionTokens(resTokens.data);
@@ -45,7 +43,6 @@ const Home = () => {
     fetchKpis();
   }, [token]);
 
-  // Datos para el gráfico de usuarios conectados por día
   const lineChartData = {
     labels: usuariosConectadosPorDia.map((item) => item.dia),
     datasets: [
@@ -59,7 +56,6 @@ const Home = () => {
     ],
   };
 
-  // Datos para el gráfico de temas más consultados
   const temasChartData = {
     labels: temasFrecuentes.map((item) => item.tema),
     datasets: [
@@ -73,7 +69,6 @@ const Home = () => {
     ],
   };
 
-  // Datos para el gráfico de selección de tokens
   const tokensChartData = {
     labels: seleccionTokens.map((item) => `${item.tokens} tokens`),
     datasets: [
@@ -97,8 +92,8 @@ const Home = () => {
           <p>{usuariosRegistrados}</p>
         </div>
         <div className="kpi">
-          <h3>Usuarios Activos</h3>
-          <p>{usuariosActivos}</p>
+          <h3>Usuarios Conectados Hoy</h3>
+          <p>{usuariosActivos}</p> {/* Este valor es actualizado cada 5 minutos */}
         </div>
       </div>
 

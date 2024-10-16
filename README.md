@@ -50,10 +50,31 @@ git push -u origin master
 
 
 
+ssh-keygen -t rsa -b 4096 -C "tu_email@example.com"
 
 
-
-
+root@operador:/home/asistentes_ia/zrn_alumnos/backend# ssh-keygen -t rsa -b 4096 -C "renzoantonioli@outlook.es"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): /root/.ssh/id_rsa_asistia
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa_asistia
+Your public key has been saved in /root/.ssh/id_rsa_asistia.pub
+The key fingerprint is:
+SHA256:v2HOoXo+mw6PRMgEgcS267QUPXAa4VKU3xvwBBgHx4A renzoantonioli@outlook.es
+The key's randomart image is:
++---[RSA 4096]----+
+|o*XO+.           |
+|E*o=o .          |
+|o.B..=           |
+|.+ =..+          |
+|  o + .oS        |
+| +   ..  .       |
+|+ .   o   =      |
+| o   . +o* +     |
+|      o=Bo+      |
++----[SHA256]-----+
+root@operador:/home/asistentes_ia/zrn_alumnos/backend# 
 
 
 

@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 700px;
+    width: 100%;
     background-color: #f5f5f5; /* Fondo gris claro */
     font-family: 'Poppins', sans-serif;
 }
@@ -16,6 +17,7 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 400px;
+    height: 400px;
     width: 100%;
 }
 
@@ -37,7 +39,7 @@ input {
 
 /* Botón de inicio de sesión */
 button {
-    width: 100%;
+    width: 30%;
     padding: 12px;
     background-color: #4CAF50;
     border: none;
